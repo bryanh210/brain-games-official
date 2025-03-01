@@ -14,9 +14,11 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.6.0",
+    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@repo/ui": "workspace:*",
-    "@repo/eslint-config": "workspace:*"
+    "react-redux": "^9.2.0"
   },
   "engines": {
     "node": ">=18"
