@@ -2,7 +2,7 @@
   "name": "brain-games-official",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build:all",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -13,12 +13,13 @@
     "turbo": "^2.4.4",
     "typescript": "5.7.3"
   },
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@repo/ui": "workspace:*",
+    "@repo/eslint-config": "workspace:*"
+  },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@10.9.2",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@10.5.2"
 }
