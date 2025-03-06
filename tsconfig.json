@@ -12,7 +12,9 @@
       "traceResolution": true,
       "baseUrl": ".",
       "paths": {
-        "@repo/provider": ["packages/provider"]
+        "@repo/provider": ["packages/provider"],
+        "@repo/store": ["packages/store"],
+        "@repo/slices": ["packages/slices"],
        }
     },
     "include": ["packages/**/*", "apps/**/*"],

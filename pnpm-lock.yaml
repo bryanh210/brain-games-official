@@ -17,6 +17,12 @@ importers:
       '@repo/provider':
         specifier: workspace:*
         version: link:packages/provider
+      '@repo/slices':
+        specifier: workspace:*
+        version: link:packages/slice
+      '@repo/store':
+        specifier: workspace:*
+        version: link:packages/store
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
@@ -179,11 +185,23 @@ importers:
 
   packages/provider: {}
 
+  packages/slice:
+    dependencies:
+      '@reduxjs/toolkit':
+        specifier: ^2.6.0
+        version: 2.6.0(react-redux@9.2.0(@types/react@19.0.10)(react@19.0.0)(redux@5.0.1))(react@19.0.0)
+      react-redux:
+        specifier: ^9.2.0
+        version: 9.2.0(@types/react@19.0.10)(react@19.0.0)(redux@5.0.1)
+
   packages/store:
     dependencies:
       '@reduxjs/toolkit':
         specifier: ^2.6.0
         version: 2.6.0(react-redux@9.2.0(@types/react@19.0.10)(react@19.0.0)(redux@5.0.1))(react@19.0.0)
+      '@repo/slices':
+        specifier: workspace:*
+        version: link:../slice
       react-redux:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.0.10)(react@19.0.0)(redux@5.0.1)

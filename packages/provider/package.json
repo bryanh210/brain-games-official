@@ -1,9 +1,8 @@
 {
     "name": "@repo/provider",
     "version": "1.0.0",
-    "main": "dist/Provider.js",
-    "module": "dist/Provider.js",
-    "types": "dist/Provider.d.ts",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
     "exports": {
       ".": {
         "import": "./dist/Provider.js",

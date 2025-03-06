@@ -10,11 +10,11 @@
     "module": "ESNext",
     "jsx": "preserve",
     "baseUrl": ".",
-    "paths": {
-      "@repo/provider": [
-        "../../../packages/provider"
-      ]
-    },
+    // "paths": {
+    //   "@repo/provider": [
+    //     "../../../packages/provider"
+    //   ]
+    // },
     "plugins": [
       {
         "name": "next"
