@@ -1,0 +1,19 @@
+{
+    "name": "@repo/provider",
+    "version": "1.0.0",
+    "main": "dist/Provider.js",
+    "module": "dist/Provider.js",
+    "types": "dist/Provider.d.ts",
+    "exports": {
+      ".": {
+        "import": "./dist/Provider.js",
+        "require": "./dist/Provider.js",
+        "types": "./dist/Provider.d.ts"
+      }
+    },
+    "files": ["dist"],
+    "scripts": {
+        "build": "tsc --emitDeclarationOnly false"
+    }
+}
+  

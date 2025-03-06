@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "outDir": "dist",
+      "declaration": true,
+      "declarationMap": true,
+      "emitDeclarationOnly": false,
+      "skipLibCheck": true,
+      "moduleResolution": "bundler",
+      "module": "ESNext",
+      "jsx": "react-jsx",
+      "traceResolution": true,
+      "baseUrl": ".",
+      "paths": {
+        "@repo/provider": ["packages/provider"]
+       }
+    },
+    "include": ["packages/**/*", "apps/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
+  
