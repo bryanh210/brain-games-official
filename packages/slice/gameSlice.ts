@@ -60,17 +60,28 @@ const gameSlice = createSlice({
       5) update startingMoves
       6) HERE: calculate the score correctly percentage wise
     */
-    resetGame: (state) => { state.level = 1; state.rawScore = 0; },
+    resetGame: (state) => { 
+      state.rawScore = 0;
+      state.positionHistory = [];
+      state.soundHistory = [];
+      state.userAction = [];
+      state.moveCount = 0;
+      state.startingMoves = getStartingMove(state.level);
+    },
+    // allow user to manually set level
+    setLevel: (state, action: PayloadAction<number>) => {
+      const newLevel = action.payload;
+      // should not happen but check anyways
+      if(newLevel < 1) return;
+      state.level = newLevel;
+      gameSlice.caseReducers.resetGame(state);
+    },
     // this is machine move
     addMove:(state, action: PayloadAction<CurrentPosAndSound>) => {
       state.positionHistory.push(action.payload.currPosition);
       state.soundHistory.push(action.payload.currSound);
     },
     endGame:(state) => {
-      state.positionHistory = [];
-      state.soundHistory = [];
-      state.userAction = [];
-      state.moveCount = 0;
       const realScore = calculateRealScore({rawScore: state.rawScore, startingMoves: state.startingMoves});
 
       if(state.scoreHistory.length < 3) {
@@ -87,7 +98,7 @@ const gameSlice = createSlice({
         state.level--;
       }
 
-      state.startingMoves = getStartingMove(state.level);
+      gameSlice.caseReducers.resetGame(state);
     },
     compareMove:(state, action:PayloadAction<CompareMoveAction>) => {
       // equal here because we increment count at the end, not beginning

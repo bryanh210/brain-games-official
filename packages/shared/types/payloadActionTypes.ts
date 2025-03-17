@@ -5,7 +5,6 @@ export type Position = {
 
 export type Sound = {
   id: string;
-//   playedAt: Position;
 };
 
 export type CurrentPosAndSound = {
