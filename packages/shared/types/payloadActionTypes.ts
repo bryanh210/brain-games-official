@@ -17,6 +17,7 @@ export type CurrentUserAction = {
     timestamp: number,
     posBoolean: boolean;
     soundBoolean: boolean;
+    didAct: boolean;
 }
 
 export type CompareMoveAction = {

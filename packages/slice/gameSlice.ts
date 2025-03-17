@@ -14,7 +14,8 @@ const isBelow60 = score => score <= 60;
 export type userAction = {
   timeStamp: number,
   sound: boolean,
-  position: boolean
+  position: boolean,
+  didAct: boolean
 }
 
 export type GameState = {
@@ -59,7 +60,7 @@ const gameSlice = createSlice({
       5) update startingMoves
       6) HERE: calculate the score correctly percentage wise
     */
-    resetGame: (state) => { state.level = 1; state.score = 0; },
+    resetGame: (state) => { state.level = 1; state.rawScore = 0; },
     // this is machine move
     addMove:(state, action: PayloadAction<CurrentPosAndSound>) => {
       state.positionHistory.push(action.payload.currPosition);
@@ -71,25 +72,29 @@ const gameSlice = createSlice({
       state.userAction = [];
       state.moveCount = 0;
       const realScore = calculateRealScore({rawScore: state.rawScore, startingMoves: state.startingMoves});
-      if(state.scoreHistory.length <= 3) {
+
+      if(state.scoreHistory.length < 3) {
         state.scoreHistory.push(realScore);
       } else {
-        state.scoreHistory.pop()
+        state.scoreHistory.shift();
+        state.scoreHistory.push(realScore); // do this to add new score in and keep max array length to be 3
       }
 
       // bump level up or down and bump starting move accordingly
       if(state.scoreHistory.every(isAbove80)) {
         state.level++;
-      } else if(state.scoreHistory.every(isBelow60)) {
+      } else if(state.scoreHistory.every(isBelow60) && state.level > 1) {
         state.level--;
       }
 
       state.startingMoves = getStartingMove(state.level);
     },
     compareMove:(state, action:PayloadAction<CompareMoveAction>) => {
-      if(state.moveCount > state.startingMoves) {
+      // equal here because we increment count at the end, not beginning
+      if(state.moveCount >= state.startingMoves) {
         // end the game
         gameSlice.caseReducers.endGame(state);
+        return;
       }
       /*
         1) If time since last move <= current time (handled in local component)
@@ -118,19 +123,24 @@ const gameSlice = createSlice({
       const historicSound = state.soundHistory[state.soundHistory.length - state.level - 1];
       const currPos = state.positionHistory[state.positionHistory.length - 1];
       const currSound = state.soundHistory[state.soundHistory.length - 1];
-      const CSAPosBoolean = action.payload.currentUserAction.posBoolean;
-      const CSASoundBoolean = action.payload.currentUserAction.soundBoolean;
+      const CUAPosBoolean = action.payload.currentUserAction.posBoolean;
+      const CUASoundBoolean = action.payload.currentUserAction.soundBoolean;
+      const didNotAct = !action.payload.currentUserAction.didAct;
+      const doPositionsMatch = comparePosition({ pos1: historicPos, pos2:currPos });
+      const doSoundsMatch = compareSound({ sound1: historicSound, sound2: currSound});
+      const bothPositionsAndSoundsMatchCurrent = doPositionsMatch && doSoundsMatch;
+      const bothPositionsAndSoundsNotMatchCurrent = !doPositionsMatch && !doSoundsMatch;
 
-      const fullMatch = CSAPosBoolean && CSASoundBoolean && comparePosition({ pos1: historicPos, pos2:currPos }) && compareSound({ sound1: historicSound, sound2: currSound});
-      const partialMatch = CSAPosBoolean && comparePosition({ pos1: historicPos, pos2:currPos }) || CSASoundBoolean && compareSound({ sound1: historicSound, sound2: currSound});
-      const isMatch = fullMatch || partialMatch;
-
-      if(isMatch) {
-        state.rawScore = state.rawScore + 1;
+      // if the user didn't press any button
+      if(didNotAct) {
+        state.rawScore += bothPositionsAndSoundsNotMatchCurrent ? 1 : -1;
       } else {
-        state.rawScore = state.rawScore - 1;
-      }
+        const fullMatch = CUAPosBoolean && CUASoundBoolean && bothPositionsAndSoundsMatchCurrent;
+        const partialMatch = (CUAPosBoolean && doPositionsMatch) || (CUASoundBoolean && doSoundsMatch);
+        const isMatch = fullMatch || partialMatch;
 
+        state.rawScore += isMatch ? 1 : -1;
+      }
       state.moveCount++;
     }
   },
