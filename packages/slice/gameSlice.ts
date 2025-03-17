@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Position, Sound, CurrentPosAndSound, CompareMoveAction } from '../shared/types/payloadActionTypes';
-import { comparePosition, compareSound } from '../shared/utilities/helper';
+import { comparePosition, compareSound, calculateRealScore } from '../shared/utilities/helper';
 
-const getStartingMove = (n) {
+const getStartingMove = (n: number): number => {
   if(n < 1) return 20;
   // return the multiply of n + 20
-  return Math.ceil(20/n) * n
+  return Math.ceil(20/n) * n;
 }
 
-const isAbove80 = score => score >= 80%;
-const isBelow60 = score => score <=60%;
+const isAbove80 = score => score >= 80;
+const isBelow60 = score => score <= 60;
 
 export type userAction = {
   timeStamp: number,
@@ -21,7 +21,8 @@ export type GameState = {
   level: number,
   positionHistory: Position[],
   soundHistory: Sound[],
-  score: number,
+  rawScore: number,
+  realScore: number,
   scoreHistory: number[],
   userAction: userAction[],
   timeBeforeAnswer: number,
@@ -34,7 +35,8 @@ const initialState: GameState = {
   level: 1,
   positionHistory: [],
   soundHistory: [],
-  score: 0,
+  rawScore: 0,
+  realScore: 0,
   scoreHistory: [],
   userAction: [],
   timeBeforeAnswer: 1500,
@@ -68,16 +70,17 @@ const gameSlice = createSlice({
       state.soundHistory = [];
       state.userAction = [];
       state.moveCount = 0;
-      if(state.scoreHistory <= 3) {
-        state.scoreHistory.push(state.score);
+      const realScore = calculateRealScore({rawScore: state.rawScore, startingMoves: state.startingMoves});
+      if(state.scoreHistory.length <= 3) {
+        state.scoreHistory.push(realScore);
       } else {
         state.scoreHistory.pop()
       }
 
       // bump level up or down and bump starting move accordingly
-      if(state.scoreHistory.every((score:number) => isAbove80)) {
+      if(state.scoreHistory.every(isAbove80)) {
         state.level++;
-      } else if(state.scoreHistory.every((score:number) => isBelow60)) {
+      } else if(state.scoreHistory.every(isBelow60)) {
         state.level--;
       }
 
@@ -123,9 +126,9 @@ const gameSlice = createSlice({
       const isMatch = fullMatch || partialMatch;
 
       if(isMatch) {
-        state.score = state.score + 1;
+        state.rawScore = state.rawScore + 1;
       } else {
-        state.score = state.score - 1;
+        state.rawScore = state.rawScore - 1;
       }
 
       state.moveCount++;
