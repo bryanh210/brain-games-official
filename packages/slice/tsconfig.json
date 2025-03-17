@@ -1,0 +1,22 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+      "outDir": "dist",
+      "rootDir": "./",
+      "declaration": true,
+      "declarationMap": true,
+      "emitDeclarationOnly": false,
+      "skipLibCheck": true,
+      "jsx": "react-jsx",
+      "moduleResolution": "bundler",
+      "module": "ESNext",
+      "baseUrl": "..",
+    //   "paths": {
+    //     "@repo/store": ["../store"],
+    //     "@repo/slice": ["../slices"]
+    //   }
+    },
+    "include": ["index.ts", "gameSlice.ts"],
+    "exclude": ["node_modules", "dist"]
+  }
+  
