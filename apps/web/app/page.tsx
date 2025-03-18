@@ -1,17 +1,12 @@
 import Link from 'next/link';
 import '../styles/global.scss';
-// import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div>
-     <div>
-      <Link href="/game">
-        <span className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Welcome to Dual N Back
-        </span>
+    <div className="flex items-center justify-center h-screen homepageFlash">
+      <Link href="/game" className="bg-[#171717] hover:bg-green-900 text-white font-bold py-2 px-4 rounded buttonFlash">
+        Welcome to Dual N Back
       </Link>
-    </div>
     </div>
   );
 }
