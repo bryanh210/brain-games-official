@@ -15,6 +15,7 @@
         "@repo/provider": ["packages/provider"],
         "@repo/store": ["packages/store"],
         "@repo/slices": ["packages/slices"],
+        "@repo/shared": ["packages/shared"],
        }
     },
     "include": ["packages/**/*", "apps/**/*"],

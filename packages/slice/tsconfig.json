@@ -2,7 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
       "outDir": "dist",
-      "rootDir": "./",
+      // "rootDir": "./",
       "declaration": true,
       "declarationMap": true,
       "emitDeclarationOnly": false,
@@ -10,7 +10,7 @@
       "jsx": "react-jsx",
       "moduleResolution": "bundler",
       "module": "ESNext",
-      "baseUrl": "..",
+      // "baseUrl": "..",
     //   "paths": {
     //     "@repo/store": ["../store"],
     //     "@repo/slice": ["../slices"]
