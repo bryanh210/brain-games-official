@@ -1,3 +1,14 @@
+/*
+GamePage here and import the slice in
+
+*/
+
+
 export default function GamePage() {
-    return <h1>Welcome to the Game!</h1>;
+   return (
+    <div className="gamePage">
+        <div>Game Nav</div>
+        <div>Game Grid</div>
+    </div>
+   )
 }
