@@ -9,7 +9,6 @@
       "jsx": "react-jsx",
       "moduleResolution": "bundler",
       "module": "ESNext",
-      // "baseUrl": "..",
     },
     "include": ["index.ts"],
     "exclude": ["node_modules", "dist"]
