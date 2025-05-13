@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@keyframes cyberpunk {
+    0%, 100% {
+        background-color: #0ff0fc;
+    }
+
+    50% {
+        background-color: #ff00ff;
+    }
+}
+
+@keyframes showHide {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0%;
+    }
+}
+
+.homepageFlash {
+    animation: cyberpunk 2s infinite;
+}
+
+.buttonFlash {
+    animation: showHide 2s infinite;
+}

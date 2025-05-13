@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Position, Sound, CurrentPosAndSound, CompareMoveAction } from '../shared/types/payloadActionTypes';
-import { comparePosition, compareSound, calculateRealScore } from '../shared/utilities/helper';
+import { Position, Sound, CurrentPosAndSound, CompareMoveAction, comparePosition, compareSound, calculateRealScore } from '@repo/shared';
+// import { comparePosition, compareSound, calculateRealScore } from '../shared/utilities/helper';
 
 const getStartingMove = (n: number): number => {
   if(n < 1) return 20;

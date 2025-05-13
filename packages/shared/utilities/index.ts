@@ -1,0 +1,1 @@
+export { comparePosition, compareSound,  calculateRealScore } from './helper';

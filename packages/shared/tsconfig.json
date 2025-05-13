@@ -9,12 +9,8 @@
       "jsx": "react-jsx",
       "moduleResolution": "bundler",
       "module": "ESNext",
-      "baseUrl": "..",
-      "paths": {
-        "@repo/slices": ["../slices"]
-      }
     },
-    "include": ["index.ts", "store.ts"],
+    "include": ["index.ts"],
     "exclude": ["node_modules", "dist"]
 }
   
