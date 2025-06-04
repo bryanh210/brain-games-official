@@ -1,13 +1,9 @@
-/*
-GamePage here and import the slice in
-
-*/
-
+import GameNavBar from './GameNavBar';
 
 export default function GamePage() {
    return (
     <div className="gamePage">
-        <div>Game Nav</div>
+        <GameNavBar />
         <div>Game Grid</div>
     </div>
    )

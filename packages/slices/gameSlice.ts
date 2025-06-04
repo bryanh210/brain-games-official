@@ -29,6 +29,7 @@ export type GameState = {
   timeBeforeAnswer: number,
   successThreshold: number,
   moveCount: number,
+  moveNumber: number,
   startingMoves: number
 }
 
@@ -43,8 +44,12 @@ const initialState: GameState = {
   timeBeforeAnswer: 1500,
   successThreshold: 80,
   moveCount: 0,
+  moveNumber: 0,
   startingMoves: getStartingMove(1)
 }
+
+console.log('✅ moveNumber in initialState:', initialState.moveNumber);
+
 
 const gameSlice = createSlice({
   name: "game",
@@ -60,7 +65,8 @@ const gameSlice = createSlice({
       5) update startingMoves
       6) HERE: calculate the score correctly percentage wise
     */
-    resetGame: (state) => { 
+    resetGame: (state) => {
+      state.moveNumber = 0;
       state.rawScore = 0;
       state.positionHistory = [];
       state.soundHistory = [];
