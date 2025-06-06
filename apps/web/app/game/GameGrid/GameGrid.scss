@@ -1,0 +1,17 @@
+@import '../global.scss';
+
+// do flexbox first then grid next session
+.grid {
+    width: 26px;
+    margin: 10px auto; // display right and left evenly as browser sees fit
+    display: flex;
+    flex-wrap: wrap; // is what makes the items wrap according to width
+}
+
+.cell {
+    border: 1px solid $border-color;
+    margin: 5px;
+    width: calc(33.3% - 10px); // 5px to allow for 5px margin both side;
+    aspect-ratio: 1;
+}
+
