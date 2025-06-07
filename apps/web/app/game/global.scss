@@ -45,4 +45,13 @@ button {
 .stopAnimation {
     animation: none;
 }
-  
+
+.gridMatchButtonsTable {
+    display: flex;
+    justify-content: center;
+}
+
+.gameGridMatchButton {
+    display: flex;
+    flex-direction: column;
+}

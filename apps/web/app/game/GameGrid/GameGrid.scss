@@ -2,7 +2,7 @@
 
 // do flexbox first then grid next session
 .grid {
-    width: 26px;
+    width: auto;
     margin: 10px auto; // display right and left evenly as browser sees fit
     display: flex;
     flex-wrap: wrap; // is what makes the items wrap according to width

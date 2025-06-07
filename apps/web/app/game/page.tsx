@@ -4,6 +4,7 @@ import './global.scss';
 
 import GameGrid from './GameGrid';
 import MatchButtons from './MatchButtons';
+import ResultTable from './ResultTable';
 
 const start = 'start';
 const stop = 'stop';
@@ -27,8 +28,13 @@ export default function GamePage() {
         >
             {gameButtonText}
         </button>
-        <GameGrid />
-        <MatchButtons />
+        <div className="gridMatchButtonsTable">
+            <div className="gameGridMatchButtons">
+                <GameGrid />
+                <MatchButtons />
+            </div>
+            <ResultTable />
+        </div>
     </div>
    )
 }
