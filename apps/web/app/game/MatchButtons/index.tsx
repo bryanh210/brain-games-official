@@ -4,8 +4,8 @@ export default function MatchButtons() {
     
     return (
        <div className="matchButtons">
-            <button>P = Position Match</button>
-            <button>A = Audio Match</button>
+            <button>A key= Position Match</button>
+            <button>L key = Audio Match</button>
        </div>
     )
 }

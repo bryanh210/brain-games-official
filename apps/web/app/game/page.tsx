@@ -6,8 +6,8 @@ import GameGrid from './GameGrid';
 import MatchButtons from './MatchButtons';
 import ResultTable from './ResultTable';
 
-const start = 'start';
-const stop = 'stop';
+const start = 'start (space)';
+const stop = 'stop (space)';
 
 export default function GamePage() {
     const [ inProgress, setInProgress ] = useState(false);
