@@ -1,10 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './global.scss';
 
 import GameGrid from './GameGrid';
 import MatchButtons from './MatchButtons';
 import ResultTable from './ResultTable';
+
+import { getAutoFlashIndex } from './utilities/gameLogic';
 
 const start = 'start (space)';
 const stop = 'stop (space)';
@@ -12,6 +14,17 @@ const stop = 'stop (space)';
 export default function GamePage() {
     const [ inProgress, setInProgress ] = useState(false);
     const [ gameButtonText, setGameButtonText ] = useState(start);
+    const [ flashIndex, setFlashIndex ] = useState(null);
+
+    useEffect(() => {
+        if(!inProgress) return;
+        const interval = setInterval(() => {
+            setFlashIndex(getAutoFlashIndex);
+        }, 2000);
+
+        // kick in when dependency in array changes
+        return () => clearInterval(interval);
+    }, [inProgress])
 
     const toggleGameState = () => {
         setInProgress(!inProgress);
@@ -30,7 +43,7 @@ export default function GamePage() {
         </button>
         <div className="gridMatchButtonsTable">
             <div className="gameGridMatchButtons">
-                <GameGrid />
+                <GameGrid flashIndex={flashIndex} />
                 <MatchButtons />
             </div>
             <ResultTable />
