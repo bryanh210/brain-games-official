@@ -11,10 +11,10 @@
     "moduleResolution": "bundler",
     "module": "ESNext",
     "baseUrl": "..",
-    "paths": {
-      "@repo/store": ["../store"],
-      "@repo/slices": ["../slices"]
-    }
+    // "paths": {
+    //   "@repo/store": ["../store"],
+    //   "@repo/slices": ["../slices"]
+    // }
   },
   "include": ["index.ts", "provider.tsx", "store/store.ts"],
   "exclude": ["node_modules", "dist"]

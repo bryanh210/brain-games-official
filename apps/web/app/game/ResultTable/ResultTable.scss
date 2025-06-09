@@ -1,0 +1,13 @@
+.tableAndTitle {
+    display: flex;
+    flex-direction: column;
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+}
+
+.tableAndTitle, .table {
+    color: yellow
+}

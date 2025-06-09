@@ -2,6 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
       "outDir": "dist",
+      "rootDir": "./",
       "declaration": true,
       "declarationMap": true,
       "emitDeclarationOnly": false,
@@ -10,9 +11,9 @@
       "moduleResolution": "bundler",
       "module": "ESNext",
       "baseUrl": "..",
-      "paths": {
-        "@repo/slices": ["../slices"]
-      }
+      // "paths": {
+      //   "@repo/slices": ["../slices"]
+      // }
     },
     "include": ["index.ts", "store.ts"],
     "exclude": ["node_modules", "dist"]

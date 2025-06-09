@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+$bg-color : #111;
+$text-color: #0f0;
+$border-color: #0f0;
+$main-font: 'Orbitron', sans-serif;
+$button-bg-color: #08f;
+$button-text-color: white;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 20px;
+}
+
+
+body {
+    background-color:$bg-color;
+    font-family: $main-font;
+    color: $text-color;
+}
+
+button {
+    background-color: $button-bg-color;
+    color: $button-text-color;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.gameButton {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+}
+
+.stopAnimation {
+    animation: none;
+}
+
+.gridMatchButtonsTable {
+    display: flex;
+    justify-content: center;
+}
+
+.gameGridMatchButton {
+    display: flex;
+    flex-direction: column;
+}
