@@ -18,7 +18,7 @@ export default function GamePage() {
 
     useEffect(() => {
         if(!inProgress) return;
-        console.log(inProgress, 'inProgress')
+
         const interval = setInterval(() => {
             setFlashIndex(getAutoFlashIndex);
             const randomAlphabetLetter = alphabetLetters[chooseRandomAlphabetIndx()];
@@ -27,12 +27,48 @@ export default function GamePage() {
 
         // kick in when dependency in array changes
         return () => clearInterval(interval);
-    }, [inProgress])
+    }, [inProgress]);
+
+    useEffect(() => {
+        const keyDown = (e) => {
+            if(e.code === 'Space') {
+                toggleGameState();
+            }
+        }
+
+        window.addEventListener('keydown', keyDown)
+        // is this correct
+        return () => window.removeEventListener('keydown', keyDown)
+    }, []);
+
+    // useEffect(() => {
+    //     window.addEventListener('keydown', (e) => {
+    //         if(e.code === 'Space') {
+    //             toggleGameState();
+    //         }
+    //     })
+    //     // is this correct
+    //     return () => window.removeEventListener('keydown', (e) => {
+    //         if(e.code === 'Space') {
+    //             toggleGameState();
+    //         }
+    //     })
+    // }, []);
+
+    // const toggleGameState = () => {
+    //     setInProgress(!inProgress);
+    //     const currGameButtonState = !inProgress ? stop : start;
+    //     setGameButtonText(currGameButtonState);
+    // }
 
     const toggleGameState = () => {
-        setInProgress(!inProgress);
-        const currGameButtonState = !inProgress ? stop : start;
-        setGameButtonText(currGameButtonState);
+        setInProgress(prev => {
+            const newProgressState = !prev;
+            const currGameButtonState = newProgressState ? stop : start;
+            setGameButtonText(currGameButtonState);
+            // why need to return
+            return newProgressState;
+        })
     }
 
    return (
