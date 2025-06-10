@@ -6,7 +6,7 @@ import GameGrid from './GameGrid';
 import MatchButtons from './MatchButtons';
 import ResultTable from './ResultTable';
 
-import { getAutoFlashIndex } from './utilities/gameLogic';
+import { getAutoFlashIndex, getAudio, alphabetLetters, chooseRandomAlphabetIndx } from './utilities/gameLogic';
 
 const start = 'start (space)';
 const stop = 'stop (space)';
@@ -18,8 +18,11 @@ export default function GamePage() {
 
     useEffect(() => {
         if(!inProgress) return;
+        console.log(inProgress, 'inProgress')
         const interval = setInterval(() => {
             setFlashIndex(getAutoFlashIndex);
+            const randomAlphabetLetter = alphabetLetters[chooseRandomAlphabetIndx()];
+            getAudio(randomAlphabetLetter);
         }, 2000);
 
         // kick in when dependency in array changes
@@ -28,7 +31,7 @@ export default function GamePage() {
 
     const toggleGameState = () => {
         setInProgress(!inProgress);
-        const currGameButtonState = inProgress ? stop : start;
+        const currGameButtonState = !inProgress ? stop : start;
         setGameButtonText(currGameButtonState);
     }
 
