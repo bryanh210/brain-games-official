@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './global.scss';
 
 import GameGrid from './GameGrid';
@@ -37,7 +38,6 @@ export default function GamePage() {
         }
 
         window.addEventListener('keydown', keyDown)
-        // is this correct
         return () => window.removeEventListener('keydown', keyDown)
     }, []);
 

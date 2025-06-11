@@ -8,7 +8,7 @@ export type Sound = {
 };
 
 export type CurrentPosAndSound = {
-  currPosition: Position;
+  currPos: Position;
   currSound: Sound;
 };
 

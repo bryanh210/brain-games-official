@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Position, Sound, CurrentPosAndSound, CompareMoveAction, comparePosition, compareSound, calculateRealScore } from '@repo/shared';
-// import { comparePosition, compareSound, calculateRealScore } from '../shared/utilities/helper';
 
 const getStartingMove = (n: number): number => {
   if(n < 1) return 20;
@@ -18,10 +17,15 @@ export type userAction = {
   didAct: boolean
 }
 
+export type Move = {
+  sound: Sound,
+  position: Position,
+  movenumber: number,
+}
+
 export type GameState = {
   level: number,
-  positionHistory: Position[],
-  soundHistory: Sound[],
+  moveHistory: Move[],
   rawScore: number,
   realScore: number,
   scoreHistory: number[],
@@ -35,8 +39,7 @@ export type GameState = {
 
 const initialState: GameState = {
   level: 1,
-  positionHistory: [],
-  soundHistory: [],
+  moveHistory: [],
   rawScore: 0,
   realScore: 0,
   scoreHistory: [],
@@ -47,8 +50,6 @@ const initialState: GameState = {
   moveNumber: 0,
   startingMoves: getStartingMove(1)
 }
-
-console.log('✅ moveNumber in initialState:', initialState.moveNumber);
 
 
 const gameSlice = createSlice({
@@ -84,8 +85,14 @@ const gameSlice = createSlice({
     },
     // this is machine move
     addMove:(state, action: PayloadAction<CurrentPosAndSound>) => {
-      state.positionHistory.push(action.payload.currPosition);
-      state.soundHistory.push(action.payload.currSound);
+      // not action but action.payload
+      const { currPos, currSound } = action.payload;
+      state.moveHistory.push({
+        currPos,
+        currSound,
+        moveNumber: state.moveNumber
+      })
+      state.moveNumber++;
     },
     endGame:(state) => {
       const realScore = calculateRealScore({rawScore: state.rawScore, startingMoves: state.startingMoves});
