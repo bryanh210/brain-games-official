@@ -87,11 +87,12 @@ const gameSlice = createSlice({
     // this is machine move
     addMove:(state, action: PayloadAction<Move>) => {
       // not action but action.payload
-      const { currPos, currSound, currUserAction } = action.payload;
+      const { currPos, currSound, currUserAction, moveNumber } = action.payload;
       state.moveHistory.push({
         currPos,
         currSound,
-        currUserAction
+        currUserAction,
+        moveNumber
       })
     },
     endGame:(state) => {

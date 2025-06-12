@@ -88,32 +88,50 @@ export default function GamePage() {
             }
 
             moveNumber.current++;
-
+            setIsSoundButtonPressed(false);
+            setVisualButtonPressed(false);
         }, 2000);
 
         // kick in when dependency in array changes
         return () => clearInterval(interval);
     }, [inProgress]);
 
+    // useEffect(() => {
+    //     if (isVisualButtonPressed && currPos.current !== null) {
+    //       userAction.current.position = true;
+    //       userAction.current.didAct = true;
+    //       userAction.current.timeStamp = Date.now();
+    //     }
+    //   }, [isVisualButtonPressed]);
+      
+    //   useEffect(() => {
+    //     if (isSoundButtonPressed && currSound.current !== null) {
+    //       userAction.current.sound = true;
+    //       userAction.current.didAct = true;
+    //       userAction.current.timeStamp = Date.now();
+    //     }
+    //   }, [isSoundButtonPressed, isVisualButtonPressed]);      
+
     useEffect(() => {
-        const timeStamp = Date.now();
+        // why shouldn't I define it here
+        // const timeStamp = Date.now();
     
         const keyDown = (e) => {
             if(e.code === 'Space') {
                 toggleGameState();
             }
 
-            if(e.code === 'a' || isVisualButtonPressedRef) {
+            if(e.code === 'a' || isVisualButtonPressedRef.current) {
                 // ref returns an object with key current
                 userAction.current.position = true;
                 userAction.current.didAct = true;
-                userAction.current.timeStamp = timeStamp;
+                userAction.current.timeStamp = Date.now();
             }
 
-            if(e.code === 'l' || isSoundButtonPressedRef) {
+            if(e.code === 'l' || isSoundButtonPressedRef.current) {
                 userAction.current.sound = true;
                 userAction.current.didAct = true;
-                userAction.current.timeStamp = timeStamp;
+                userAction.current.timeStamp = Date.now();
             }
         }
 
