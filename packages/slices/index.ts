@@ -1,1 +1,1 @@
-export { default as gameReducer, resetGame } from './gameSlice';
+export { default as gameReducer, addMove, compareMoves, setLevel, endGame } from './gameSlice';

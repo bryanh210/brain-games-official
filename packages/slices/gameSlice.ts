@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Position, Sound, CurrentPosAndSound, CompareMoveAction, comparePosition, compareSound, calculateRealScore } from '@repo/shared';
+import { Position, Sound, CurrentPosAndSound, CompareMoveAction, comparePosition, compareSound, calculateRealScore, CurrentUserAction  } from '@repo/shared';
 
 const getStartingMove = (n: number): number => {
   if(n < 1) return 20;
@@ -14,13 +14,14 @@ export type userAction = {
   timeStamp: number,
   sound: boolean,
   position: boolean,
-  didAct: boolean
+  didAct: boolean,
 }
 
 export type Move = {
-  sound: Sound,
-  position: Position,
-  movenumber: number,
+  currSound: Sound,
+  currPos: Position,
+  moveNumber: number,
+  currUserAction: CurrentUserAction,
 }
 
 export type GameState = {
@@ -84,15 +85,14 @@ const gameSlice = createSlice({
       gameSlice.caseReducers.resetGame(state);
     },
     // this is machine move
-    addMove:(state, action: PayloadAction<CurrentPosAndSound>) => {
+    addMove:(state, action: PayloadAction<Move>) => {
       // not action but action.payload
-      const { currPos, currSound } = action.payload;
+      const { currPos, currSound, currUserAction } = action.payload;
       state.moveHistory.push({
         currPos,
         currSound,
-        moveNumber: state.moveNumber
+        currUserAction
       })
-      state.moveNumber++;
     },
     endGame:(state) => {
       const realScore = calculateRealScore({rawScore: state.rawScore, startingMoves: state.startingMoves});
@@ -113,7 +113,7 @@ const gameSlice = createSlice({
 
       gameSlice.caseReducers.resetGame(state);
     },
-    compareMove:(state, action:PayloadAction<CompareMoveAction>) => {
+    compareMoves:(state, action:PayloadAction<CompareMoveAction>) => {
       // equal here because we increment count at the end, not beginning
       if(state.moveCount >= state.startingMoves) {
         // end the game
@@ -170,5 +170,5 @@ const gameSlice = createSlice({
   },
 });
 
-export const { resetGame } = gameSlice.actions;
+export const { resetGame, addMove, compareMoves, setLevel, endGame } = gameSlice.actions;
 export default gameSlice.reducer;

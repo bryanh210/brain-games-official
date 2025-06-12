@@ -17,6 +17,7 @@
 
 .highlight {
     background: #6b00b6;
-    transition: 0.3s ease-in;
+    // transition: background-color 0.2s ease;
+    animation: pulse 0.3s;
     border-radius: 5px;
 }

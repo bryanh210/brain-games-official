@@ -21,5 +21,5 @@ export type CurrentUserAction = {
 
 export type CompareMoveAction = {
     machineMove: CurrentPosAndSound,
-    currentUserAction: CurrentUserAction
+    currentUserAction: CurrentUserAction,
 }

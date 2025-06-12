@@ -112,6 +112,9 @@ importers:
       '@repo/provider':
         specifier: workspace:*
         version: link:../../packages/provider
+      '@repo/slices':
+        specifier: workspace:*
+        version: link:../../packages/slices
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
